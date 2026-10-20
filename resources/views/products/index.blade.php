@@ -1,117 +1,229 @@
 <x-layouts::app :title="'Produtos'">
-    <div class="flex flex-col gap-6">
 
+    <div class="flex flex-col gap-8">
+
+        {{-- Cabeçalho --}}
         <div class="flex items-center justify-between">
+
             <div>
                 <h1 class="text-2xl font-semibold">
                     Produtos
                 </h1>
 
-                <p class="text-sm text-zinc-600">
+                <p class="text-sm text-zinc-600 dark:text-zinc-400">
                     {{ $establishment->name }}
                 </p>
             </div>
 
             <a
                 href="{{ route('establishments.products.create', $establishment) }}"
-                class="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white"
+                class="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
             >
                 Novo produto
             </a>
+
         </div>
 
+
+        {{-- Mensagem de sucesso --}}
         @if (session('success'))
+
             <div class="rounded-lg bg-green-100 px-4 py-3 text-sm text-green-800">
                 {{ session('success') }}
             </div>
+
         @endif
 
+
+        {{-- Nenhum produto --}}
         @if ($products->isEmpty())
-            <div class="rounded-xl border border-zinc-200 bg-white p-6">
-                <p class="text-zinc-600">
+
+            <div class="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-900">
+
+                <p class="text-zinc-600 dark:text-zinc-400">
                     Nenhum produto cadastrado.
                 </p>
+
             </div>
+
         @else
-            <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white">
-                <table class="w-full text-left text-sm">
-                    <thead class="border-b border-zinc-200 bg-zinc-50">
-                        <tr>
-                            <th class="px-4 py-3">Produto</th>
-                            <th class="px-4 py-3">Categoria</th>
-                            <th class="px-4 py-3">Preço</th>
-                            <th class="px-4 py-3">Status</th>
-                            <th class="px-4 py-3">Ações</th>
-                        </tr>
-                    </thead>
 
-                    <tbody>
-                        @foreach ($products as $product)
-                            <tr class="border-b border-zinc-100 last:border-0">
-                                <td class="px-4 py-3">
-                                    <div class="font-medium">
-                                        {{ $product->name }}
-                                    </div>
+            {{-- Produtos agrupados por categoria --}}
+            @foreach ($products->groupBy('category_id') as $categoryProducts)
 
-                                    @if ($product->description)
-                                        <div class="text-xs text-zinc-500">
-                                            {{ $product->description }}
-                                        </div>
-                                    @endif
-                                </td>
+                @php
+                    $category = $categoryProducts->first()->category;
+                @endphp
 
-                                <td class="px-4 py-3">
-                                    {{ $product->category->name }}
-                                </td>
 
-                                <td class="px-4 py-3">
-                                    R$ {{ number_format($product->price, 2, ',', '.') }}
-                                </td>
+                <section class="flex flex-col gap-4">
 
-                                <td class="px-4 py-3">
-                                    @if ($product->active)
-                                        <span class="text-green-600">
-                                            Ativo
-                                        </span>
+                    {{-- Cabeçalho da categoria --}}
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <h2 class="text-lg font-semibold">
+                                {{ $category->name }}
+                            </h2>
+
+                            <p class="text-sm text-zinc-500 dark:text-zinc-400">
+
+                                {{ $categoryProducts->count() }}
+
+                                {{ $categoryProducts->count() === 1 ? 'produto' : 'produtos' }}
+
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="{{ route('establishments.products.create', $establishment) }}?category_id={{ $category->id }}"
+                            class="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium transition hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+                        >
+                            + Novo
+                        </a>
+
+                    </div>
+
+
+                    {{-- Cards dos produtos --}}
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+                        @foreach ($categoryProducts as $product)
+
+                            <div
+                                class="flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white transition hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900"
+                            >
+
+                                {{-- Foto do produto --}}
+                                <div class="aspect-[4/3] w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+
+                                    @if ($product->image_path)
+
+                                        <img
+                                            src="{{ asset('storage/' . $product->image_path) }}"
+                                            alt="{{ $product->name }}"
+                                            class="h-full w-full object-cover"
+                                        >
+
                                     @else
-                                        <span class="text-zinc-500">
-                                            Inativo
-                                        </span>
+
+                                        <div class="flex h-full items-center justify-center text-sm text-zinc-400">
+                                            Sem imagem
+                                        </div>
+
                                     @endif
-                                </td>
 
-                                <td class="px-4 py-3">
-                                    <div class="flex gap-3">
-                                        <a
-                                            href="{{ route('establishments.products.edit', [$establishment, $product]) }}"
-                                            class="text-blue-600 hover:underline"
-                                        >
-                                            Editar
-                                        </a>
+                                </div>
 
-                                        <form
-                                            method="POST"
-                                            action="{{ route('establishments.products.destroy', [$establishment, $product]) }}"
-                                        >
-                                            @csrf
-                                            @method('DELETE')
 
-                                            <button
-                                                type="submit"
-                                                class="text-red-600 hover:underline"
-                                                onclick="return confirm('Deseja excluir este produto?')"
-                                            >
-                                                Excluir
-                                            </button>
-                                        </form>
+                                {{-- Conteúdo do card --}}
+                                <div class="flex min-h-48 flex-col p-5">
+
+                                    {{-- Nome e status --}}
+                                    <div class="flex items-start justify-between gap-3">
+
+                                        <h3 class="font-semibold">
+                                            {{ $product->name }}
+                                        </h3>
+
+
+                                        @if ($product->active)
+
+                                            <span class="shrink-0 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
+                                                Ativo
+                                            </span>
+
+                                        @else
+
+                                            <span class="shrink-0 rounded-full bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-500">
+                                                Inativo
+                                            </span>
+
+                                        @endif
+
                                     </div>
-                                </td>
-                            </tr>
+
+
+                                    {{-- Descrição --}}
+                                    @if ($product->description)
+
+                                        <p class="mt-3 line-clamp-3 text-sm text-zinc-500 dark:text-zinc-400">
+                                            {{ $product->description }}
+                                        </p>
+
+                                    @else
+
+                                        <p class="mt-3 text-sm italic text-zinc-400">
+                                            Sem descrição
+                                        </p>
+
+                                    @endif
+
+
+                                    {{-- Parte inferior --}}
+                                    <div class="mt-auto pt-5">
+
+                                        {{-- Preço --}}
+                                        <div class="flex items-center justify-between">
+
+                                            <span class="text-lg font-semibold">
+                                                R$
+                                                {{ number_format($product->price, 2, ',', '.') }}
+                                            </span>
+
+                                        </div>
+
+
+                                        {{-- Ações --}}
+                                        <div class="mt-4 flex items-center gap-3 border-t border-zinc-100 pt-3 dark:border-zinc-800">
+
+                                            <a
+                                                href="{{ route('establishments.products.edit', [$establishment, $product]) }}"
+                                                class="text-sm font-medium text-blue-600 hover:underline"
+                                            >
+                                                Editar
+                                            </a>
+
+
+                                            <form
+                                                method="POST"
+                                                action="{{ route('establishments.products.destroy', [$establishment, $product]) }}"
+                                            >
+
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button
+                                                    type="submit"
+                                                    class="text-sm font-medium text-red-600 hover:underline"
+                                                    onclick="return confirm('Deseja excluir este produto?')"
+                                                >
+                                                    Excluir
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         @endforeach
-                    </tbody>
-                </table>
-            </div>
+
+                    </div>
+
+                </section>
+
+            @endforeach
+
         @endif
 
     </div>
+
 </x-layouts::app>

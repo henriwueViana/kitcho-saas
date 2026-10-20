@@ -1,0 +1,1627 @@
+/* =========================================================
+   KITCH'O — LANDING PAGE
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --verde: #328E6E;
+    --verde-mata: #2F4A3F;
+    --verde-menta: #7E9B86;
+
+    --laranja: #C65A3A;
+    --laranja-bege: #DFA688;
+
+    --ice: #F2E6DA;
+    --branco: #FFFFFF;
+
+    --texto-fraco: rgba(47, 74, 63, 0.65);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background: var(--ice);
+
+    color: var(--verde-mata);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+
+    width: min(1200px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+}
+
+.header-content {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.logo-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 15px;
+
+    background: var(--verde);
+
+    color: var(--branco);
+
+    overflow: hidden;
+
+    font-size: 21px;
+
+    box-shadow:
+        0 8px 20px rgba(50, 142, 110, 0.18);
+
+}
+
+.logo-icon img {
+    width: 28px;
+    height: 28px;
+
+    object-fit: contain;
+    display: block;
+}
+
+.logo-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    line-height: 1;
+
+}
+
+.logo-text strong {
+
+    font-size: 21px;
+
+    letter-spacing: -0.5px;
+
+}
+
+.logo-text span {
+
+    margin-top: 5px;
+
+    color: var(--verde-menta);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
+
+.navigation {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.login-link {
+
+    padding: 10px 16px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+
+}
+
+.login-link:hover {
+
+    background: rgba(255, 255, 255, 0.6);
+
+}
+
+.register-button {
+
+    padding: 11px 20px;
+
+    border-radius: 12px;
+
+    background: var(--verde);
+
+    color: var(--branco);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 8px 20px rgba(50, 142, 110, 0.15);
+
+    transition: 0.2s ease;
+
+}
+
+.register-button:hover {
+
+    background: var(--verde-mata);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    left: -180px;
+    top: 100px;
+
+    border-radius: 50%;
+
+    background: rgba(126, 155, 134, 0.18);
+
+    filter: blur(70px);
+
+}
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 400px;
+    height: 400px;
+
+    right: -180px;
+    top: 0;
+
+    border-radius: 50%;
+
+    background: rgba(198, 90, 58, 0.08);
+
+    filter: blur(70px);
+
+}
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 70px;
+
+    min-height: calc(100vh - 96px);
+
+    padding-top: 40px;
+
+    padding-bottom: 70px;
+
+}
+
+
+/* =========================================================
+   HERO TEXTO
+========================================================= */
+
+.hero-text {
+
+    max-width: 590px;
+
+}
+
+.hero-label {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 15px;
+
+    border: 1px solid rgba(126, 155, 134, 0.3);
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.55);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 5px 15px rgba(47, 74, 63, 0.04);
+
+}
+
+.status-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--verde);
+
+}
+
+
+.hero-text h1 {
+
+    max-width: 650px;
+
+    margin-top: 24px;
+
+    font-size: clamp(52px, 6vw, 78px);
+
+    line-height: 1.02;
+
+    letter-spacing: -3px;
+
+    font-weight: 750;
+
+}
+
+.hero-text h1 span {
+
+    color: var(--verde);
+
+}
+
+.hero-description {
+
+    max-width: 520px;
+
+    margin-top: 26px;
+
+    color: var(--texto-fraco);
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.hero-buttons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 34px;
+
+}
+
+.primary-button,
+.secondary-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 14px 22px;
+
+    border-radius: 16px;
+
+    font-size: 14px;
+
+    font-weight: 650;
+
+    transition: 0.2s ease;
+
+}
+
+.primary-button {
+
+    background: var(--verde);
+
+    color: var(--branco);
+
+    box-shadow:
+        0 10px 25px rgba(50, 142, 110, 0.18);
+
+}
+
+.primary-button:hover {
+
+    background: var(--verde-mata);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 30px rgba(50, 142, 110, 0.22);
+
+}
+
+.primary-button span {
+
+    font-size: 18px;
+
+}
+
+.secondary-button {
+
+    border: 1px solid rgba(47, 74, 63, 0.14);
+
+    background: rgba(255, 255, 255, 0.55);
+
+    color: var(--verde-mata);
+
+}
+
+.secondary-button:hover {
+
+    background: var(--branco);
+
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.features {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 24px;
+
+    margin-top: 32px;
+
+}
+
+.feature {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: rgba(47, 74, 63, 0.55);
+
+    font-size: 13px;
+
+}
+
+.feature span {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: rgba(50, 142, 110, 0.12);
+
+    color: var(--verde);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   HERO VISUAL
+========================================================= */
+
+.hero-visual {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 560px;
+
+}
+
+
+/* =========================================================
+   CÍRCULOS
+========================================================= */
+
+.background-circle {
+
+    position: absolute;
+
+    width: 410px;
+    height: 410px;
+
+    border-radius: 50%;
+
+    background: rgba(126, 155, 134, 0.22);
+
+}
+
+.inner-circle {
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.restaurant-card {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 430px;
+
+    padding: 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+
+    border-radius: 32px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 25px 60px rgba(47, 74, 63, 0.10);
+
+    transform: rotate(1deg);
+
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+.card-header small {
+
+    display: block;
+
+    color: var(--verde-menta);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+.card-header h2 {
+
+    margin-top: 5px;
+
+    font-size: 18px;
+
+}
+
+.card-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    background: rgba(50, 142, 110, 0.1);
+
+    color: var(--verde);
+
+    font-size: 22px;
+
+}
+
+
+/* =========================================================
+   ÁREA DO MASCOTE
+========================================================= */
+
+.mascot-area {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 260px;
+
+    margin-top: 20px;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    background: var(--ice);
+
+}
+
+.decoration {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+}
+
+.decoration-one {
+
+    width: 10px;
+    height: 10px;
+
+    top: 35px;
+    left: 45px;
+
+    background: rgba(198, 90, 58, 0.6);
+
+}
+
+.decoration-two {
+
+    width: 7px;
+    height: 7px;
+
+    top: 55px;
+    right: 60px;
+
+    background: rgba(50, 142, 110, 0.5);
+
+}
+
+.decoration-three {
+
+    width: 6px;
+    height: 6px;
+
+    bottom: 40px;
+    left: 80px;
+
+    background: var(--verde-menta);
+
+}
+
+
+/* =========================================================
+   GATO
+========================================================= */
+
+.cat {
+
+    position: relative;
+
+    width: 145px;
+
+}
+
+.cat-body {
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    width: 140px;
+    height: 150px;
+
+    border-radius: 45%;
+
+    background: var(--verde);
+
+    box-shadow:
+        0 15px 25px rgba(47, 74, 63, 0.15);
+
+}
+
+.cat-head {
+
+    position: absolute;
+
+    z-index: 3;
+
+    top: -55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 140px;
+    height: 125px;
+
+    border-radius: 48%;
+
+    background: var(--laranja-bege);
+
+    box-shadow:
+        0 7px 15px rgba(47, 74, 63, 0.08);
+
+}
+
+.ear {
+
+    position: absolute;
+
+    top: -18px;
+
+    width: 45px;
+    height: 45px;
+
+    background: var(--laranja-bege);
+
+}
+
+.ear-left {
+
+    left: 5px;
+
+    transform: rotate(-25deg);
+
+    border-radius: 90% 20% 20% 20%;
+
+}
+
+.ear-right {
+
+    right: 5px;
+
+    transform: rotate(25deg);
+
+    border-radius: 20% 90% 20% 20%;
+
+}
+
+.eyes {
+
+    display: flex;
+
+    gap: 34px;
+
+    margin-top: 10px;
+
+}
+
+.eyes span {
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: var(--verde-mata);
+
+}
+
+.nose {
+
+    width: 8px;
+    height: 7px;
+
+    margin-top: 13px;
+
+    border-radius: 50%;
+
+    background: var(--verde-mata);
+
+}
+
+.whisker {
+
+    position: absolute;
+
+    width: 32px;
+    height: 1px;
+
+    background: rgba(47, 74, 63, 0.45);
+
+}
+
+.whisker-left-one {
+
+    left: -15px;
+    top: 67px;
+
+    transform: rotate(8deg);
+
+}
+
+.whisker-left-two {
+
+    left: -15px;
+    top: 76px;
+
+}
+
+.whisker-right-one {
+
+    right: -15px;
+    top: 67px;
+
+    transform: rotate(-8deg);
+
+}
+
+.whisker-right-two {
+
+    right: -15px;
+    top: 76px;
+
+}
+
+
+/* =========================================================
+   CHAPÉU
+========================================================= */
+
+.chef-hat {
+
+    position: absolute;
+
+    z-index: 5;
+
+    top: -82px;
+
+    left: 50%;
+
+    width: 120px;
+    height: 55px;
+
+    transform: translateX(-50%);
+
+}
+
+.hat-top {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 120px;
+    height: 38px;
+
+    border-radius: 60px 60px 15px 15px;
+
+    background: var(--branco);
+
+    box-shadow:
+        0 5px 10px rgba(47, 74, 63, 0.05);
+
+}
+
+.hat-ball {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: var(--branco);
+
+}
+
+.ball-one {
+
+    width: 35px;
+    height: 35px;
+
+    left: 12px;
+    top: 0;
+
+}
+
+.ball-two {
+
+    width: 45px;
+    height: 45px;
+
+    left: 39px;
+    top: -10px;
+
+}
+
+.ball-three {
+
+    width: 35px;
+    height: 35px;
+
+    right: 10px;
+    top: 0;
+
+}
+
+
+/* =========================================================
+   AVENTAL
+========================================================= */
+
+.apron {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 90px;
+    height: 75px;
+
+    border-radius: 35px 35px 0 0;
+
+    background: rgba(255, 255, 255, 0.92);
+
+}
+
+
+/* =========================================================
+   PATAS
+========================================================= */
+
+.paw {
+
+    position: absolute;
+
+    bottom: -8px;
+
+    width: 36px;
+    height: 27px;
+
+    border-radius: 50%;
+
+    background: var(--laranja-bege);
+
+}
+
+.paw-left {
+
+    left: 5px;
+
+}
+
+.paw-right {
+
+    right: 5px;
+
+}
+
+
+/* =========================================================
+   INDICADORES DO CARD
+========================================================= */
+
+.card-stats {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+}
+
+.card-stats div {
+
+    padding: 12px;
+
+    border-radius: 15px;
+
+    background: var(--ice);
+
+}
+
+.card-stats small {
+
+    display: block;
+
+    color: rgba(47, 74, 63, 0.5);
+
+    font-size: 10px;
+
+}
+
+.card-stats strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   CARD FLUTUANTE
+========================================================= */
+
+.floating-card {
+
+    position: absolute;
+
+    z-index: 4;
+
+    bottom: 20px;
+
+    left: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    border-radius: 17px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 15px 35px rgba(47, 74, 63, 0.12);
+
+}
+
+.floating-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 12px;
+
+    background: rgba(50, 142, 110, 0.1);
+
+    color: var(--verde);
+
+    font-weight: 700;
+
+}
+
+.floating-card small {
+
+    display: block;
+
+    color: rgba(47, 74, 63, 0.45);
+
+    font-size: 10px;
+
+}
+
+.floating-card strong {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    border-top: 1px solid rgba(47, 74, 63, 0.1);
+
+}
+
+.footer-content {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    color: rgba(47, 74, 63, 0.45);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .hero-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+        padding-top: 50px;
+
+    }
+
+    .hero-text {
+
+        max-width: 700px;
+
+        margin: 0 auto;
+
+        text-align: center;
+
+    }
+
+    .hero-label {
+
+        margin: 0 auto;
+
+    }
+
+    .hero-description {
+
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    .hero-buttons {
+
+        justify-content: center;
+
+    }
+
+    .features {
+
+        justify-content: center;
+
+    }
+
+    .hero-visual {
+
+        min-height: 500px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .container {
+
+        width: min(100% - 32px, 1200px);
+
+    }
+
+    .navigation {
+
+        gap: 4px;
+
+    }
+
+    .login-link {
+
+        padding: 9px 10px;
+
+    }
+
+    .register-button {
+
+        padding: 10px 14px;
+
+    }
+
+    .logo-text span {
+
+        display: none;
+
+    }
+
+    .hero-content {
+
+        min-height: auto;
+
+        padding-top: 30px;
+
+        padding-bottom: 50px;
+
+    }
+
+    .hero-text h1 {
+
+        font-size: 48px;
+
+        letter-spacing: -2px;
+
+    }
+
+    .hero-description {
+
+        font-size: 16px;
+
+    }
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+    }
+
+    .primary-button,
+    .secondary-button {
+
+        width: 100%;
+
+    }
+
+    .hero-visual {
+
+        min-height: 430px;
+
+    }
+
+    .background-circle {
+
+        width: 320px;
+        height: 320px;
+
+    }
+
+    .inner-circle {
+
+        width: 230px;
+        height: 230px;
+
+    }
+
+    .restaurant-card {
+
+        max-width: 360px;
+
+        padding: 18px;
+
+    }
+
+    .mascot-area {
+
+        height: 220px;
+
+    }
+
+    .floating-card {
+
+        left: 0;
+
+        transform: scale(0.9);
+
+        transform-origin: left bottom;
+
+    }
+
+    .footer-content {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+}
+
+
+.site-footer {
+    margin-top: 0;
+
+    padding: 85px 24px 28px;
+
+    background: var(--verde-mata);
+
+    color: var(--branco);
+}
+
+.footer-content {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        2fr
+        1fr
+        1fr
+        1fr;
+
+    gap: 70px;
+}
+
+
+/* ========================================
+   MARCA
+======================================== */
+
+.footer-brand {
+    max-width: 260px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 16px;
+
+    border-radius: 14px;
+
+    background: var(--branco);
+
+    overflow: hidden;
+}
+
+.footer-logo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.footer-brand p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   COLUNAS
+======================================== */
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.footer-column h4 {
+    margin: 0 0 12px;
+
+    color: var(--branco);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+}
+
+.footer-column a {
+    width: fit-content;
+
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 12px;
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.footer-column a:hover {
+    color: var(--branco);
+
+    transform: translateX(2px);
+}
+
+
+/* ========================================
+   PARTE INFERIOR
+======================================== */
+
+.footer-bottom {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 55px auto 0;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.footer-bottom span,
+.footer-bottom a {
+    color: rgba(255, 255, 255, 0.45);
+
+    font-size: 11px;
+}
+
+.footer-bottom div {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bottom a {
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.footer-bottom a:hover {
+    color: var(--branco);
+}
+
+
+/* ========================================
+   RESPONSIVO
+======================================== */
+
+@media (max-width: 800px) {
+
+    .newsletter-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .newsletter-form {
+        width: 100%;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 45px 30px;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .newsletter {
+        width: calc(100% - 30px);
+    }
+
+    .newsletter-content {
+        padding: 24px 20px;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 100%;
+    }
+
+    .site-footer {
+        padding: 75px 20px 25px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 35px 20px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+
+        margin-top: 40px;
+    }
+}

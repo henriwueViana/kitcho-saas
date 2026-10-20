@@ -1,4 +1,5 @@
 <x-layouts::app :title="'Novo produto'">
+
     <div class="mx-auto max-w-2xl">
 
         <h1 class="mb-6 text-2xl font-semibold">
@@ -8,6 +9,7 @@
         <form
             method="POST"
             action="{{ route('establishments.products.store', $establishment) }}"
+            enctype="multipart/form-data"
             class="flex flex-col gap-6"
         >
             @csrf
@@ -20,6 +22,37 @@
                 autofocus
                 placeholder="Ex: Pizza Margherita"
             />
+
+            {{-- Foto do produto --}}
+            <div>
+                <label
+                    for="image"
+                    class="mb-2 block text-sm font-medium"
+                >
+                    Foto do produto
+                </label>
+
+                <input
+                    id="image"
+                    type="file"
+                    name="image"
+                    accept="image/jpeg,image/png,image/webp"
+                    class="block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm
+                           file:mr-4 file:rounded-md file:border-0 file:bg-zinc-100
+                           file:px-3 file:py-2 file:text-sm file:font-medium
+                           hover:file:bg-zinc-200"
+                >
+
+                <p class="mt-1 text-xs text-zinc-500">
+                    JPG, PNG ou WebP. Máximo de 2 MB.
+                </p>
+
+                @error('image')
+                    <p class="mt-1 text-sm text-red-600">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
 
             <div>
                 <label
@@ -99,7 +132,9 @@
                     Cancelar
                 </flux:button>
             </div>
+
         </form>
 
     </div>
+
 </x-layouts::app>

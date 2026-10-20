@@ -7,6 +7,7 @@ use App\Models\Establishment;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -46,21 +47,32 @@ class ProductController extends Controller
                 'integer',
                 'exists:categories,id',
             ],
+
             'name' => [
                 'required',
                 'string',
                 'max:255',
             ],
+
             'description' => [
                 'nullable',
                 'string',
                 'max:2000',
             ],
+
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
+
             'price' => [
                 'required',
                 'numeric',
                 'min:0',
             ],
+
             'active' => [
                 'boolean',
             ],
@@ -70,10 +82,18 @@ class ProductController extends Controller
             ->whereKey($validated['category_id'])
             ->firstOrFail();
 
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')
+                ->store('products/' . $establishment->id, 'public');
+        }
+
         $establishment->products()->create([
             'category_id' => $category->id,
             'name' => $validated['name'],
             'description' => $validated['description'] ?? null,
+            'image_path' => $imagePath,
             'price' => $validated['price'],
             'active' => $request->boolean('active'),
         ]);
@@ -115,21 +135,32 @@ class ProductController extends Controller
                 'integer',
                 'exists:categories,id',
             ],
+
             'name' => [
                 'required',
                 'string',
                 'max:255',
             ],
+
             'description' => [
                 'nullable',
                 'string',
                 'max:2000',
             ],
+
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
+
             'price' => [
                 'required',
                 'numeric',
                 'min:0',
             ],
+
             'active' => [
                 'boolean',
             ],
@@ -139,10 +170,23 @@ class ProductController extends Controller
             ->whereKey($validated['category_id'])
             ->firstOrFail();
 
+        $imagePath = $product->image_path;
+
+        if ($request->hasFile('image')) {
+
+            if ($product->image_path) {
+                Storage::disk('public')->delete($product->image_path);
+            }
+
+            $imagePath = $request->file('image')
+                ->store('products/' . $establishment->id, 'public');
+        }
+
         $product->update([
             'category_id' => $category->id,
             'name' => $validated['name'],
             'description' => $validated['description'] ?? null,
+            'image_path' => $imagePath,
             'price' => $validated['price'],
             'active' => $request->boolean('active'),
         ]);
@@ -158,6 +202,10 @@ class ProductController extends Controller
     ): RedirectResponse {
         $this->authorizeEstablishment($establishment);
         $this->authorizeProduct($establishment, $product);
+
+        if ($product->image_path) {
+            Storage::disk('public')->delete($product->image_path);
+        }
 
         $product->delete();
 
